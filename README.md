@@ -61,7 +61,7 @@ spec:
           {{- with secret "secret/data/web" -}}
             export passWord="data"
             export userName="test"
-            # Example used in the Vault documentation
+            # Example used in the Vault documentation for reference
             # export api_key="{{ .Data.data.payments_api_key }}"
           {{- end }}
     spec:
