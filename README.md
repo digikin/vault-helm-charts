@@ -5,7 +5,7 @@ Got tired trying to chase down templates and stack overflow links to solve this.
 I will try to come back and finish the other examples from here:  
 - https://developer.hashicorp.com/vault/docs/platform/k8s/injector/examples  
 
-For now this is an chart example out put for the following Vault Agent Injenctor environment variable example.  
+For now this is just one chart example for the following Vault Agent Injenctor environment variable reference.  
 - https://developer.hashicorp.com/vault/docs/platform/k8s/injector/examples#environment-variable-example
 
 ```bash
