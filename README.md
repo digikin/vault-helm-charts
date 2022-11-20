@@ -1,3 +1,13 @@
+# Helm Template for Vault Annotations
+
+Got tired trying to chase down templates and stack overflow links to solve this.  So, just putting this out there for other people hitting the same problem.  
+
+I will try to come back and finish the other examples from here:  
+- https://developer.hashicorp.com/vault/docs/platform/k8s/injector/examples  
+
+For now this is an chart example out put for the following Vault Agent Injenctor environment variable example.  
+- https://developer.hashicorp.com/vault/docs/platform/k8s/injector/examples#environment-variable-example
+
 ```bash
 eric@xps15:~/Documents/github/charts/mychart$ helm install solid-vulture . --dry-run --debug --set favoriteDrink=slurm
 install.go:192: [debug] Original chart version: ""
@@ -52,7 +62,8 @@ spec:
           {{- with secret "secret/data/web" -}}
             export passWord="data"
             export userName="test"
-            export api_key="{{ .Data.data.payments_api_key }}"
+            # Example from HashiVault Docs
+            # export api_key="{{ .Data.data.payments_api_key }}"
           {{- end }}
     spec:
       serviceAccountName: web
