@@ -25,7 +25,6 @@ spec:
             {{- range $key, $val := .envVar }}
             export {{ $key -}}={{ $val | quote }}
             {{- end}}
-            export api_key="{{ "{{" }} .Data.data.payments_api_key {{ "}}" }}"
           {{ "{{-" }} end {{ "}}" }}
     spec:
       serviceAccountName: web
