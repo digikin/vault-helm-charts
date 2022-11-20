@@ -34,7 +34,7 @@ spec:
           command:
             ['sh', '-c']
           args:
-            ['source /vault/secrets/config && {{ .entryPoint }}']
+            ['source /vault/{{ .secretConfigFileName | replace "-" "/" }} && {{ .entryPoint }}']
           {{- end }}
           ports:
             - containerPort: 9090
