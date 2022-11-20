@@ -1,0 +1,10 @@
+vault:
+  inject: true
+  role: web
+  secretConfigFileName: secret-config
+  secretConfigPath: secret/data/web
+  envVar: 
+    userName: test
+    passWord: data
+  #drink: coffee
+  entryPoint: python3 -c ./start
