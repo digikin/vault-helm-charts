@@ -9,21 +9,20 @@ For now this is just one chart example for the following Vault Agent Injenctor e
 - https://developer.hashicorp.com/vault/docs/platform/k8s/injector/examples#environment-variable-example
 
 ```bash
-eric@xps15:~/Documents/github/charts/mychart$ helm install solid-vulture . --dry-run --debug --set favoriteDrink=slurm
+eric@xps15:~/Documents/github/charts/mychart$ helm install --generate-name . --dry-run --debug
 install.go:192: [debug] Original chart version: ""
 install.go:209: [debug] CHART PATH: /home/eric/Documents/github/charts/mychart
 
-NAME: solid-vulture
-LAST DEPLOYED: Sat Nov 19 22:35:19 2022
+NAME: chart-1668915852
+LAST DEPLOYED: Sat Nov 19 22:44:12 2022
 NAMESPACE: default
 STATUS: pending-install
 REVISION: 1
 TEST SUITE: None
 USER-SUPPLIED VALUES:
-favoriteDrink: slurm
+{}
 
 COMPUTED VALUES:
-favoriteDrink: slurm
 vault:
   entryPoint: python3 -c ./start
   envVar:
@@ -62,8 +61,7 @@ spec:
           {{- with secret "secret/data/web" -}}
             export passWord="data"
             export userName="test"
-            # Example from HashiVault Docs
-            # export api_key="{{ .Data.data.payments_api_key }}"
+            export api_key="{{ .Data.data.payments_api_key }}"
           {{- end }}
     spec:
       serviceAccountName: web
