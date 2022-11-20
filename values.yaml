@@ -1,7 +1,7 @@
 vault:
   inject: true
   role: web
-  secretConfigFileName: secret-config
+  secretConfigFileName: config
   secretConfigPath: secret/data/web
   envVar: 
     userName: test
