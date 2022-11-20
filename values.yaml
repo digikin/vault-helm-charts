@@ -6,5 +6,4 @@ vault:
   envVar: 
     userName: test
     passWord: data
-  #drink: coffee
   entryPoint: python3 -c ./start
