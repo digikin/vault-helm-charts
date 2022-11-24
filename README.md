@@ -61,6 +61,8 @@ spec:
           {{- with secret "secret/data/web" -}}
             export passWord='{{ .Data.data.VaultKVsecret2 }}'
             export userName='{{ .Data.data.VaultKVsecret1 }}'
+            # Example used in the Vault documentation for reference
+            # export api_key="{{ .Data.data.payments_api_key }}"
           {{- end }}
     spec:
       serviceAccountName: web
@@ -74,5 +76,3 @@ spec:
           ports:
             - containerPort: 9090
 ```
-            # Example used in the Vault documentation for reference
-            # export api_key="{{ .Data.data.payments_api_key }}"
