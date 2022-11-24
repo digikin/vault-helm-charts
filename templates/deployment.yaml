@@ -18,9 +18,9 @@ spec:
         {{- with .Values.vault }}
         vault.hashicorp.com/agent-inject: {{ .inject | quote }}
         vault.hashicorp.com/role: {{ .role | quote }}
-        vault.hashicorp.com/agent-inject-secret-{{ .secretConfigFileName }}: {{ .secretConfigPath | quote }}
+        vault.hashicorp.com/agent-inject-secret-{{ .secretConfigFileName | lower }}: {{ .secretConfigPath | quote }}
         # Environment variable export template
-        vault.hashicorp.com/agent-inject-template-config: |
+        vault.hashicorp.com/agent-inject-template-{{ .secretConfigFileName | lower }}: |
           {{ "{{" }}- with secret {{ .secretConfigPath | quote }} {{ "-}}" }}
             {{- range $key, $val := .envVar }}
             export {{ $key -}}={{- "'{{ .Data.data." }}{{ $val}}{{ " }}'" -}}
