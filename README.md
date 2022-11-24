@@ -9,12 +9,12 @@ For now this is just one chart example for the following Vault Agent Injenctor e
 - https://developer.hashicorp.com/vault/docs/platform/k8s/injector/examples#environment-variable-example
 
 ```bash
-eric@xps15:~/Documents/github/charts/mychart$ helm install --generate-name . --dry-run --debug
+eric@xps15:~/Documents/github/charts/mychart$ helm install solid-vulture . --dry-run --debug
 install.go:192: [debug] Original chart version: ""
 install.go:209: [debug] CHART PATH: /home/eric/Documents/github/charts/mychart
 
-NAME: chart-1668915852
-LAST DEPLOYED: Sat Nov 19 22:44:12 2022
+NAME: solid-vulture
+LAST DEPLOYED: Wed Nov 23 19:45:37 2022
 NAMESPACE: default
 STATUS: pending-install
 REVISION: 1
@@ -26,11 +26,11 @@ COMPUTED VALUES:
 vault:
   entryPoint: python3 -c ./start
   envVar:
-    passWord: data
-    userName: test
+    passWord: VaultKVsecret2
+    userName: VaultKVsecret1
   inject: true
   role: web
-  secretConfigFileName: secret-config
+  secretConfigFileName: config
   secretConfigPath: secret/data/web
 
 HOOKS:
@@ -59,10 +59,8 @@ spec:
         # Environment variable export template
         vault.hashicorp.com/agent-inject-template-config: |
           {{- with secret "secret/data/web" -}}
-            export passWord="data"
-            export userName="test"
-            # Example used in the Vault documentation for reference
-            # export api_key="{{ .Data.data.payments_api_key }}"
+            export passWord='{{ .Data.data.VaultKVsecret2 }}'
+            export userName='{{ .Data.data.VaultKVsecret1 }}'
           {{- end }}
     spec:
       serviceAccountName: web
@@ -72,7 +70,9 @@ spec:
           command:
             ['sh', '-c']
           args:
-            ['source /vault/secrets/config && python3 -c ./start']
+            ['source /vault/secret/config && python3 -c ./start']
           ports:
             - containerPort: 9090
 ```
+            # Example used in the Vault documentation for reference
+            # export api_key="{{ .Data.data.payments_api_key }}"
