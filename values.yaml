@@ -4,6 +4,6 @@ vault:
   secretConfigFileName: config
   secretConfigPath: secret/data/web
   envVar: 
-    userName: test
-    passWord: data
+    userName: VaultKVsecret1
+    passWord: VaultKVsecret2
   entryPoint: python3 -c ./start
