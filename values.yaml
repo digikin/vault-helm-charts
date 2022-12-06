@@ -6,4 +6,4 @@ vault:
   envVar: 
     userName: VaultKVsecret1
     passWord: VaultKVsecret2
-  entryPoint: python3 -c ./start
+  entryPoint: /app

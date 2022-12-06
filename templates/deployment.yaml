@@ -30,11 +30,9 @@ spec:
       serviceAccountName: web
       containers:
         - name: web
-          image: alpine:latest
+          image: golang:alpine
           command:
-            ['sh', '-c']
-          args:
-            ['source /vault/secret/{{ .secretConfigFileName }} && {{ .entryPoint }}']
+            ['sh', '-c', 'source /vault/secret/{{ .secretConfigFileName }} && {{ .entryPoint }}']
           {{- end }}
           ports:
             - containerPort: 9090

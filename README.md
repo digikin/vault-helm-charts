@@ -1,6 +1,6 @@
 # Helm Template for Vault Annotations
 
-Got tired trying to chase down templates and stack overflow links to solve this.  So, just putting this out there for other people hitting the same problem.  
+Got tired trying to chase down templates and stack overflow links to solve this.  So, just putting this out there for other people hitting the same problem.
 
 I will try to come back and finish the other examples from here:  
 - https://developer.hashicorp.com/vault/docs/platform/k8s/injector/examples  
@@ -9,12 +9,12 @@ For now this is just one chart example for the following Vault Agent Injenctor e
 - https://developer.hashicorp.com/vault/docs/platform/k8s/injector/examples#environment-variable-example
 
 ```bash
-eric@xps15:~/Documents/github/charts/mychart$ helm install solid-vulture . --dry-run --debug
+eric@xps15:~/Documents/github/charts/mychart$ helm install --generate-name . --dry-run --debug
 install.go:192: [debug] Original chart version: ""
 install.go:209: [debug] CHART PATH: /home/eric/Documents/github/charts/mychart
 
-NAME: solid-vulture
-LAST DEPLOYED: Wed Nov 23 19:45:37 2022
+NAME: chart-1670285795
+LAST DEPLOYED: Mon Dec  5 19:16:35 2022
 NAMESPACE: default
 STATUS: pending-install
 REVISION: 1
@@ -24,7 +24,7 @@ USER-SUPPLIED VALUES:
 
 COMPUTED VALUES:
 vault:
-  entryPoint: python3 -c ./start
+  entryPoint: /app
   envVar:
     passWord: VaultKVsecret2
     userName: VaultKVsecret1
@@ -61,18 +61,14 @@ spec:
           {{- with secret "secret/data/web" -}}
             export passWord='{{ .Data.data.VaultKVsecret2 }}'
             export userName='{{ .Data.data.VaultKVsecret1 }}'
-            # Example used in the Vault documentation for reference
-            # export api_key="{{ .Data.data.payments_api_key }}"
           {{- end }}
     spec:
       serviceAccountName: web
       containers:
         - name: web
-          image: alpine:latest
+          image: golang:alpine
           command:
-            ['sh', '-c']
-          args:
-            ['source /vault/secret/config && python3 -c ./start']
+            ['sh', '-c', 'source /vault/secret/config && /app']
           ports:
             - containerPort: 9090
 ```
